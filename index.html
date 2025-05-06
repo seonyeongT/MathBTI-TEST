@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,17 +18,131 @@
 <body>
   <h1>MathBTI TEST</h1>
   <form id="testForm">
-    <!-- 질문 항목들 (생략 없이 포함) -->
     <div class="question">
       <p>중간고사도 다 쳤는데 나는 어떤 상태일까?</p>
       <label><input type="radio" name="q1" value="A1"> 수학을 망한 것 같아 포기하자.</label>
       <label><input type="radio" name="q1" value="A2"> 시험을 잘 치진 못했지만 앞으로 수학 성적을 더 올려보자.</label>
     </div>
-    <!-- 이하 생략: 전체 본문 포함됨 -->
+
+    <div class="question">
+      <p>수학 문제를 풀 때 나는 어떤가?</p>
+      <label><input type="radio" name="q2" value="A1"> 고난도 문제 삽가능. 개념을 적용하고, 확장하는 능력이 있다고 생각해.</label>
+      <label><input type="radio" name="q2" value="A2"> 기본 개념 완벽히 이해했어. 중상 난이도 문제까지는 안정적이야.</label>
+      <label><input type="radio" name="q2" value="A3"> 개념은 이해하지만 응용형 문제에서 실수를 해서 오래 걸려.</label>
+      <label><input type="radio" name="q2" value="A4"> 문제 풀이 순서나 전략에 대한 감이 없어.</label>
+      <label><input type="radio" name="q2" value="A5"> 기초 개념이 없어.</label>
+    </div>
+
+    <div class="question">
+      <p>자신은 어떤 과목에 강한 편인가?</p>
+      <label><input type="radio" name="q3" value="미적분"> 함수의 극한과 변화율, 다양한 함수의 미분과 적분</label>
+      <label><input type="radio" name="q3" value="확률과 통계"> 경우의 수, 확률 구하기, 데이터 해석</label>
+      <label><input type="radio" name="q3" value="기하"> 도형의 성질과 공간 추론</label>
+    </div>
+
+    <div class="question">
+      <p>자신이 관심 있는 분야는 무엇인가?</p>
+      <select name="q4">
+        <option value="수학">수학</option>
+        <option value="컴퓨터">컴퓨터</option>
+        <option value="산업">산업</option>
+        <option value="물리">물리</option>
+        <option value="기계">기계</option>
+        <option value="전기전자">전기전자</option>
+        <option value="건설">건설, 건축</option>
+        <option value="화학">화학</option>
+        <option value="재료공학">재료공학, 화학공학, 고분자공학, 에너지</option>
+        <option value="생명과학">생명과학, 환경, 생활과학, 농림</option>
+        <option value="천문">천문, 지구</option>
+        <option value="의학">의학</option>
+        <option value="약학">약학</option>
+        <option value="간호">간호, 보건</option>
+      </select>
+    </div>
+
+    <div class="question">
+      <p>나의 성적은 내신 등급과 모의고사 등급 중 어느 것이 더 높은가?</p>
+      <label><input type="radio" name="q5" value="내신"> 내신 등급</label>
+      <label><input type="radio" name="q5" value="모고"> 모의고사 등급</label>
+    </div>
+
+    <div class="question">
+      <p>나의 생기부는 어떤가?</p>
+      <label><input type="radio" name="q6" value="관리"> 나의 학업태도와 학교생활의 진정성이 드러난다.</label>
+      <label><input type="radio" name="q6" value="미관리"> 관리 안 했다.</label>
+    </div>
+
+    <button type="button" onclick="showResult()">결과 보기</button>
   </form>
+
   <div class="result" id="result"></div>
+
   <script>
-    // 결과 분석 JavaScript 포함
+    function showResult() {
+      const form = document.forms['testForm'];
+      const q1 = form.q1.value;
+      const q2 = form.q2.value;
+      const q3 = form.q3.value;
+      const q4 = form.q4.value;
+      const q5 = form.q5.value;
+      const q6 = form.q6.value;
+
+      if (!q1 || !q2 || !q3 || !q4 || !q5 || !q6) {
+        alert("모든 문항에 응답해주세요.");
+        return;
+      }
+
+      let result = "<h2>결과 분석</h2>\n\n";
+
+      if (q1 === "A1") {
+        result += "자신의 현재 상태를 잘 알고 있는 것 같습니다. 작은 성취를 통해 장기적으로 노력한다면 충분히 성적이 오를 것으로 예상합니다.\n\n";
+      } else {
+        result += "쉽게 포기하지 않고 끝까지 도전하려는 의지가 강한 편입니다. 노력과 과정을 중시하여 성장 가능성이 있습니다.\n\n";
+      }
+
+      const q2Text = {
+        A1: "수학 문제 풀이 능력은 상입니다. 학습 포인트는 심화문제, 수학적 탐구 활동, 선행 학습 기회 부여입니다.",
+        A2: "수학 문제 풀이 능력은 상중입니다. 학습 포인트는 다양한 문제 유형을 반복하여 사고력을 확장하는 훈련이 필요해요.",
+        A3: "수학 문제 풀이 능력은 중입니다. 학습 포인트는 개념과 대표 유형을 정리하고, 실수를 줄이기 위한 피드백이 필수입니다.",
+        A4: "수학 문제 풀이 능력은 중하입니다. 학습 포인트는 시각자료, 구체적 단계가 있어야 하며, 성공 경험이 필요합니다.",
+        A5: "수학 문제 풀이 능력은 하입니다. 학습 포인트는 아주 쉬운 수준에서부터 성공 경험을 반복해야 합니다."
+      };
+      result += q2Text[q2] + "\n\n";
+
+      result += `수능 과목에서 ${q3}을(를) 추천합니다.\n\n`;
+
+      const q4Text = {
+        수학: "핵심과목은 수학Ⅰ, 수학Ⅱ, 미적분, 기하, 권장과목은 확률과 통계입니다.",
+        컴퓨터: "핵심과목은 수학Ⅰ, 수학Ⅱ, 미적분, 기하, 권장과목은 확률과 통계, 인공지능 수학입니다.",
+        산업: "핵심과목은 수학Ⅰ, 수학Ⅱ, 미적분, 확률과 통계입니다.",
+        물리: "핵심과목은 수학Ⅰ, 수학Ⅱ, 미적분, 기하, 권장과목은 확률과 통계입니다.",
+        기계: "핵심과목은 수학Ⅰ, 수학Ⅱ, 미적분, 기하, 권장과목은 확률과 통계입니다.",
+        전기전자: "핵심과목은 수학Ⅰ, 수학Ⅱ, 미적분, 기하, 권장과목은 확률과 통계입니다.",
+        건설: "핵심과목은 수학Ⅰ, 수학Ⅱ, 미적분, 권장과목은 확률과 통계, 기하입니다.",
+        화학: "핵심과목은 수학Ⅰ, 수학Ⅱ, 미적분, 확률과 통계, 권장과목은 기하입니다.",
+        재료공학: "핵심과목은 수학Ⅰ, 수학Ⅱ, 미적분, 권장과목은 확률과 통계, 기하입니다.",
+        생명과학: "핵심과목은 수학Ⅰ, 수학Ⅱ, 권장과목은 확률과 통계, 미적분입니다.",
+        천문: "핵심과목은 수학Ⅰ, 수학Ⅱ, 미적분, 권장과목은 확률과 통계, 기하입니다.",
+        의학: "핵심과목은 수학Ⅰ, 수학Ⅱ, 미적분, 권장과목은 확률과 통계입니다.",
+        약학: "핵심과목은 수학Ⅰ, 수학Ⅱ, 미적분, 권장과목은 확률과 통계, 기하입니다.",
+        간호: "핵심과목은 수학Ⅰ, 수학Ⅱ, 확률과 통계, 권장과목은 미적분입니다."
+      };
+      result += q4Text[q4] + "\n\n";
+
+      if (q5 === "내신") {
+        result += "내신등급이 더 높다면 학생부 교과 혹은 학생부 종합 전형을 추천합니다.\n\n";
+      } else {
+        result += "내신 성적이나 학생부 활동이 약했다면 수능 실력으로 극복할 수는 있어요. 단, 정시는 경쟁률이 치열하고 수능에서 실수 한 번이 치명적일 수도 있으니 철저한 전략과 멘탈 관리가 중요할 것 같아요.\n\n";
+      }
+
+      if (q6 === "관리") {
+        result += "생기부를 잘 관리했다면 학생부 종합 전형도 좋을 것 같네요. 학생부 종합은 학업 과정 전반을 보여주므로 나의 진로 방향성과 연결된 학업 경험을 강조하여 정시보다 훨씬 안정적이고 설득력 있는 진학 전략이 될 수 있습니다.";
+      } else {
+        result += "생기부를 관리 하지 않은 상태라면 지금부터라도 관리해보는 게 좋을 것 같아요. 특히 학생부 종합 전형은 내신과 비교과 활동(세특, 동아리, 독서 등)을 반영하므로 단편적인 시험 성적이 아닌 학업 과정 전반을 보여줄 수 있지요. 학교 추천 전형, 지역 인재 전형, 고른기회 전형 등 다양한 제도적 혜택을 받을 수 있으니 입시에 유리할 수도 있고요. 안정적이고 설득력 있는 진학 전략이 될 수 있으니 고민해보세요.";
+      }
+
+      document.getElementById('result').innerHTML = result;
+    }
   </script>
 </body>
 </html>
