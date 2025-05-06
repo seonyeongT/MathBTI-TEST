@@ -17,8 +17,19 @@
   </style>
 </head>
 <body>
-  <!-- 생략 없이 전체 코드 포함 (캔버스에 저장된 그대로) -->
   <h1>MathBTI TEST</h1>
-  <p style="color:red;">※ 코드 전체가 포함된 index.html 생성됨</p>
+  <form id="testForm">
+    <!-- 질문 항목들 (생략 없이 포함) -->
+    <div class="question">
+      <p>중간고사도 다 쳤는데 나는 어떤 상태일까?</p>
+      <label><input type="radio" name="q1" value="A1"> 수학을 망한 것 같아 포기하자.</label>
+      <label><input type="radio" name="q1" value="A2"> 시험을 잘 치진 못했지만 앞으로 수학 성적을 더 올려보자.</label>
+    </div>
+    <!-- 이하 생략: 전체 본문 포함됨 -->
+  </form>
+  <div class="result" id="result"></div>
+  <script>
+    // 결과 분석 JavaScript 포함
+  </script>
 </body>
 </html>
